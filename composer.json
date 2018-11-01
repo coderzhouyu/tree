@@ -5,14 +5,14 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "niklas lu",
-      "email": "332553882@qq.com",
-      "role": "Developer"
+      "name": "zhouyu",
+      "email": "994212048@qq.com",
+      "role": ""
     }
   ],
   "autoload" : {
     "psr-4" : {
-      "niklaslu\\" : "src"
+      "zhouyu\\" : "src"
     }
   }
 }

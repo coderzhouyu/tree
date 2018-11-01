@@ -1,35 +1,39 @@
 <?php
 
 namespace zhouyu;
-class UnLimitTree
+class Tree
 {
-    //组合一维数组
-    Static Public function unlimitedForLevel ($cate, $html = '--', $pid = 0, $level = 0) {
+    /**
+     * 获取一个附加层级的一维数组
+     */
+    static public function getArray ($cate, $html = '--', $pid = 0, $level = 0) {
         $arr = array();
         foreach ($cate as $k => $v) {
             if ($v['pid'] == $pid) {
                 $v['level'] = $level + 1;
                 $v['html']  = str_repeat($html, $level);
                 $arr[] = $v;
-                $arr = array_merge($arr, self::unlimitedForLevel($cate, $html, $v['id'], $level + 1));
+                $arr = array_merge($arr, self::getArray($cate, $html, $v['id'], $level + 1));
             }
         }
         return $arr;
     }
-    //组合多维数组
-    Static Public function unlimitedForLayer ($cate, $name = 'child', $pid = 0, $level = 0) {
+    /**
+     * 获取一个树形数组
+     */
+    static public function getTree ($cate, $name = 'child', $pid = 0, $level = 0) {
         $arr = array();
         foreach ($cate as $v) {
             if ($v['pid'] == $pid) {
                 $v['level'] = $level + 1;
-                $v[$name] = self::unlimitedForLayer($cate, $name, $v['id'], $level + 1);
+                $v[$name] = self::getTree($cate, $name, $v['id'], $level + 1);
                 $arr[] = $v;
             }
         }
         return $arr;
     }
     //传递一个子分类ID返回所有的父级分类
-    Static Public function getParents ($cate, $id) {
+    static public function getParents ($cate, $id) {
         $arr = array();
         foreach ($cate as $v) {
             if ($v['id'] == $id) {
@@ -51,7 +55,7 @@ class UnLimitTree
         return $arr;
     }
     //传递一个父级分类ID返回所有子分类
-    Static Public function getChilds ($cate, $pid) {
+    static public function getChilds ($cate, $pid) {
         $arr = array();
         foreach ($cate as $v) {
             if ($v['pid'] == $pid) {
