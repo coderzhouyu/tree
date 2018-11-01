@@ -1,13 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * Author: Niklas Lu
- * Email: 332553882@qq.com
- * Date: 2016/6/23
- * Time: 10:30
- */
-namespace niklaslu;
+namespace zhouyu;
 class UnLimitTree
 {
     //组合一维数组
