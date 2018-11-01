@@ -24,11 +24,12 @@ class UnLimitTree
         return $arr;
     }
     //组合多维数组
-    Static Public function unlimitedForLayer ($cate, $name = 'child', $pid = 0) {
+    Static Public function unlimitedForLayer ($cate, $name = 'child', $pid = 0, $level = 0) {
         $arr = array();
         foreach ($cate as $v) {
             if ($v['pid'] == $pid) {
-                $v[$name] = self::unlimitedForLayer($cate, $name, $v['id']);
+                $v['level'] = $level + 1;
+                $v[$name] = self::unlimitedForLayer($cate, $name, $v['id'], $level + 1);
                 $arr[] = $v;
             }
         }
