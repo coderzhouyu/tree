@@ -13,7 +13,7 @@ class Tree
                 $v['level'] = $level + 1;
                 $v['html']  = str_repeat($html, $level);
                 $arr[] = $v;
-                $arr = array_merge($arr, self::getArray($cate, $html, $v['id'], $level + 1));
+                $arr = array_merge($arr, self::getArray($cate,$pidname, $html, $v['id'], $level + 1));
             }
         }
         return $arr;
@@ -26,7 +26,7 @@ class Tree
         foreach ($cate as $v) {
             if ($v[$pidname] == $pid) {
                 $v['level'] = $level + 1;
-                $v[$name] = self::getTree($cate, $name, $v['id'], $level + 1);
+                $v[$name] = self::getTree($cate,$pidname, $name, $v['id'], $level + 1);
                 $arr[] = $v;
             }
         }
@@ -49,13 +49,13 @@ class Tree
         foreach ($cate as $v) {
             if ($v[$pidname] == $pid) {
                 $arr[] = $v['id'];
-                $arr = array_merge($arr, self::getChildsId($cate, $v['id']));
+                $arr = array_merge($arr, self::getChildsId($cate, $v['id'],$pidname));
             }
         }
         return $arr;
     }
     //传递一个父级分类ID返回所有子分类
-    static public function getChilds ($cate, $pid) {
+    static public function getChilds ($cate, $pid,$pidname) {
         $arr = array();
         foreach ($cate as $v) {
             if ($v[$pidname] == $pid) {
