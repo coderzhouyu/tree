@@ -60,7 +60,7 @@ class Tree
         foreach ($cate as $v) {
             if ($v[$pidname] == $pid) {
                 $arr[] = $v;
-                $arr = array_merge($arr, self::getChilds($cate, $v['id']));
+                $arr = array_merge($arr, self::getChilds($cate, $v['id']),$pidname);
             }
         }
         return $arr;
