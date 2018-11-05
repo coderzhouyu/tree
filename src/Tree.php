@@ -33,12 +33,13 @@ class Tree
         return $arr;
     }
     //传递一个子分类ID返回所有的父级分类
-    static public function getParents ($cate, $id,$pidname='pid') {
+    static public function getParents ($cate, $pid,$pidname='pid') {
         $arr = array();
+        dump($pid);
         foreach ($cate as $v) {
-            if ($v['id'] == $id) {
+            if ($v['id'] == $pid) {
                 $arr[] = $v;
-                $arr = array_merge(self::getParents($cate, $v[$pidname]), $arr);
+                $arr = array_merge($arr,self::getParents($cate, $v[$pidname], $pidname));
             }
         }
         return $arr;
