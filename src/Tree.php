@@ -35,7 +35,6 @@ class Tree
     //传递一个子分类ID返回所有的父级分类
     static public function getParents ($cate, $pid,$pidname='pid') {
         $arr = array();
-        dump($pid);
         foreach ($cate as $v) {
             if ($v['id'] == $pid) {
                 $arr[] = $v;
