@@ -13,7 +13,7 @@ class Tree
                 $v['level'] = $level + 1;
                 $v['html']  = str_repeat($html, $level);
                 $arr[] = $v;
-                $arr = array_merge($arr, self::getArray($cate,$pidname, $html, $v[$idname], $level + 1));
+                $arr = array_merge($arr, self::getArray($cate,$pidname, $html, $v[$idname], $level + 1,$idname));
             }
         }
         return $arr;
@@ -26,7 +26,7 @@ class Tree
         foreach ($cate as $v) {
             if ($v[$pidname] == $pid) {
                 $v['level'] = $level + 1;
-                $v[$name] = self::getTree($cate,$pidname, $name, $v[$idname], $level + 1);
+                $v[$name] = self::getTree($cate,$pidname, $name, $v[$idname], $level + 1,$idname);
                 $arr[] = $v;
             }
         }
@@ -38,7 +38,7 @@ class Tree
         foreach ($cate as $v) {
             if ($v[$idname] == $pid) {
                 $arr[] = $v;
-                $arr = array_merge($arr,self::getParents($cate, $v[$pidname], $pidname));
+                $arr = array_merge($arr,self::getParents($cate, $v[$pidname], $pidname,$idname));
             }
         }
         return $arr;
@@ -49,7 +49,7 @@ class Tree
         foreach ($cate as $v) {
             if ($v[$pidname] == $pid) {
                 $arr[] = $v[$idname];
-                $arr = array_merge($arr, self::getChildsId($cate, $v[$idname],$pidname));
+                $arr = array_merge($arr, self::getChildsId($cate, $v[$idname],$pidname,$idname));
             }
         }
         return $arr;
@@ -60,7 +60,7 @@ class Tree
         foreach ($cate as $v) {
             if ($v[$pidname] == $pid) {
                 $arr[] = $v;
-                $arr = array_merge($arr, self::getChilds($cate, $v[$idname]),$pidname);
+                $arr = array_merge($arr, self::getChilds($cate, $v[$idname]),$pidname,$idname);
             }
         }
         return $arr;
